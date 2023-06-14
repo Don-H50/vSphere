@@ -4,6 +4,11 @@
         https://blog.51cto.com/u_748290/5526390     -   very clear
         https://blog.csdn.net/hl449006540/article/details/122159999     -   how to set ESXI
         https://www.cnblogs.com/haidragon/p/16843418.html       -   vCenter's vul exp notes
+    register ID with some details:
+        address: SACRAMENTO
+        zip: 94203-0001
+        state: California
+        city: SACRAMENTO
         
 如果打算构建一个基于VMware的虚拟化环境，需要先安装ESXi，然后再安装vCenter。
 
