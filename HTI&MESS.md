@@ -1,6 +1,10 @@
     vm账号：Pink_Flatter@proton.me
     install url：https://customerconnect.vmware.com/downloads/info/slug/datacenter_cloud_infrastructure/vmware_vsphere/7_0
-
+    Some learning notes:
+        https://blog.51cto.com/u_748290/5526390     -   very clear
+        https://blog.csdn.net/hl449006540/article/details/122159999     -   how to set ESXI
+        https://www.cnblogs.com/haidragon/p/16843418.html       -   vCenter's vul exp notes
+        
 如果打算构建一个基于VMware的虚拟化环境，需要先安装ESXi，然后再安装vCenter。
 
       ESXi是VMware的一种虚拟化操作系统，它可以直接安装在物理服务器上，并负责管理和运行虚拟机。
