@@ -49,3 +49,34 @@ vCenter提供了哪些应用接口？对其API可以怎么进行分类？
       操作对象：如虚拟机、主机、数据中心、网络、存储等。
       用途：如管理、监控、自动化等。
       开发语言：如果考虑到SDK，也可以按照支持的编程语言（如Java、Perl、Python等）进行分类。
+
+
+api use：
+      blog： https://blog.csdn.net/qq_38882672/article/details/128905667
+      api：  https://developer.vmware.com/apis/vsphere-automation/v8.0.0/cis/
+
+      vSphere Automation APIs - vSphere自动化API
+      Appliance REST APIs - Appliance REST API（Appliance是一种设备，此处可能指虚拟化应用程序的设备）
+      CIS REST APIs - CIS REST API（CIS可能指vSphere的组件集合，如vCenter Server）
+      Content REST APIs - Content REST API（Content可能指与vSphere相关的资源、模板、映像等内容）
+      ESX REST APIs - ESX REST API（ESX可能指ESXi虚拟化服务器，它是vSphere的一部分）
+      vAPI REST APIs - vAPI REST API（vAPI是vSphere的一个组件，用于API管理和交互）
+      vCenter REST APIs - vCenter REST API（vCenter是vSphere的管理平台）
+      vStats REST APIs - vStats REST API（vStats可能指与虚拟机和主机相关的统计数据）
+
+
+vCenter提供了哪些应用接口？对其API可以怎么进行分类？
+
+      vCenter Server提供了多种应用程序接口（APIs）以供开发人员使用。这些API用于执行各种任务，包括但不限于虚拟机的创建、删除和管理，集群的创建和管理，网络的配置和管理，存储的配置和管理等。
+      这些API主要包括以下几种类型：
+            vSphere API：vSphere API是vCenter Server的主要API集，它提供了管理和配置虚拟化环境的大部分功能，包括对虚拟机、主机、数据中心、网络、存储和其他相关组件的操作。
+            vSphere Automation API：vSphere Automation API提供了一套基于RESTful的API，适用于新的和现有的开发人员，以及系统管理员。这些API使您可以创建、更新、读取和删除vSphere组件。
+            vSphere Web Services API：这是一套SOAP接口，用于对vCenter Server进行更复杂的操作，如性能监控、事件和任务处理，以及其他更复杂的管理任务。
+            vSphere SDKs：vSphere SDKs包括用于不同编程语言（如Java、Perl、Python等）的库，以便于使用特定编程语言更方便地调用vSphere API。
+      
+      在对vCenter的API进行分类时，你可以根据以下几个维度：
+            接口类型：如SOAP、RESTful等。
+            操作类型：如创建、读取、更新、删除（CRUD）等。
+            操作对象：如虚拟机、主机、数据中心、网络、存储等。
+            用途：如管理、监控、自动化等。
+            开发语言：如果考虑到SDK，也可以按照支持的编程语言（如Java、Perl、Python等）进行分类。
