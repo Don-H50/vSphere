@@ -54,6 +54,7 @@ vCenter提供了哪些应用接口？对其API可以怎么进行分类？
 api use：
       blog： https://blog.csdn.net/qq_38882672/article/details/128905667
       api：  https://developer.vmware.com/apis/vsphere-automation/v8.0.0/cis/
+      python conn：https://www.cnblogs.com/zy6103/p/9052433.html
 
       vSphere Automation APIs - vSphere自动化API
       Appliance REST APIs - Appliance REST API（Appliance是一种设备，此处可能指虚拟化应用程序的设备）
