@@ -43,3 +43,9 @@ ESXi和vCenter可以安装在不同的操作系统上，具体取决于你的需
       因此，建议在安装前查阅VMware官方文档，以获取最新的安装要求和建议。
   
 ESXi可以安装在虚拟机中。虽然ESXi通常作为物理服务器的操作系统来运行，但在特定的测试、实验或开发环境中，你也可以将ESXi安装在虚拟机中进行模拟和实践。
+
+
+bilibili：
+
+    https://www.bilibili.com/video/BV1JZ4y1c7ro?p=37&vd_source=2829d49eac20f9f8f390fa78f8754035
+    http://bilibili.iiitab.com/
