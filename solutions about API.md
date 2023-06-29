@@ -7,6 +7,14 @@ vCenter是什么类型的软件？和它属于同一种类型的软件有哪些�
       Proxmox VE：开源的虚拟化管理平台，支持KVM和LXC等虚拟化技术。
       Oracle VM Manager：用于管理和监控Oracle VM虚拟化环境的软件。
       这些软件都提供了类似的功能，使管理员能够集中管理和监控虚拟化环境中的资源和虚拟机。它们都旨在提高虚拟化环境的效率和可管理性。
+
+
+vCenter提供的web端服务是运行在什么服务器上？tomcat、apache或者是其它？
+
+      vCenter提供的Web端服务实际上是运行在一个内嵌的Web服务器上，而不是在常见的Tomcat、Apache等外部Web服务器上。
+      在较早的vCenter版本中，vCenter使用的是VMware自家开发的Web服务器，名为vSphere Web Services (vws)。它是一种基于Java的内嵌Web服务器，专门为vCenter的管理界面和API服务而设计。
+      然而，从vCenter 7.0版本开始，VMware将其Web端服务迁移到了基于Spring Boot的内嵌Web服务器。具体而言，vCenter 7.0及更高版本使用的是由VMware自家开发的Clarity UI框架和Spring Boot集成的内嵌Web服务器，以提供更现代化和灵活的Web界面和服务。
+      因此，vCenter的Web端服务不依赖于外部的Tomcat、Apache等常见的Web服务器。相反，它使用内部开发的Web服务器来承载和提供管理界面和API服务。
       
    
 vCenter提供了应用接口吗？
