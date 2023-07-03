@@ -72,4 +72,14 @@
 
     在vCenter中，DCERPC协议的使用通常是透明的，它是在底层网络协议栈中处理的，对于上层的管理界面和应用程序来说，通常不需要关心这些细节。然而，了解这些协议的工作原理，可以帮助你更好地理解vCenter的网络通信，以及可能遇到的网络问题。
 
+-----------
+DCERPC (Distributed Computing Environment / Remote Procedure Calls) 是在网络中的不同计算机之间进行远程过程调用的一种协议。在vCenter中，它常常是间接使用的，比如当vCenter需要与Active Directory进行通信，或者与Windows系统进行通信时。
+要直观地了解DCERPC协议在vCenter中的应用，你可以通过以下方法：
+
+  Wireshark分析：你可以使用Wireshark这样的网络协议分析器来捕获和分析vCenter与其他系统之间的通信。在Wireshark中，你可以过滤DCERPC协议的通信，然后详细查看每个包的内容。这可以帮助你理解DCERPC协议的工作原理，以及它在vCenter中的应用。
+  阅读源代码：如果vCenter的某些组件是开源的，你可以阅读其源代码来了解DCERPC协议的使用。虽然vCenter本身并不开源，但是VMware提供了很多其他的开源项目，其中一些可能涉及到DCERPC协议的使用。
+  阅读相关文档和论坛：VMware和其他社区提供了很多关于vCenter的文档和讨论。通过阅读这些资料，你可能能找到关于DCERPC协议在vCenter中应用的信息。
+  
+  记住，虽然DCERPC协议的理论知识很重要，但真正理解和应用这些知识，最好的办法是通过实践，例如编写代码，或者分析实际的网络通信。
+
 
