@@ -61,3 +61,15 @@
         如果仍然存在问题，可能需要联系 VMware 的技术支持以获取进一步的帮助。
 
       你可以在 VMware 的官方网站上找到 vRealize Operations Manager 的详细文档，包括如何将它与 vCenter Server 集成。
+
+
+## 什么是vCenter的DCERPC协议？这个协议在vCenter中体现在哪里？
+
+  DCERPC (Distributed Computing Environment / Remote Procedure Calls) 是一种支持在网络中的不同计算机之间进行远程过程调用的协议。
+  简单来说，它使得一个程序可以在一个系统（客户端）上请求另一个系统（服务器）   上的程序进行操作，而客户端不需要知道任何网络协议的细节。
+
+    vCenter是VMware的集中式管理平台，用于管理VMware vSphere环境中的ESXi主机和虚拟机。vCenter本身并不直接使用DCERPC协议，但是它可能间接使用该协议。例如，如果vCenter需要与Active Directory进行通信，那么Active Directory可能会使用DCERPC协议来处理这些请求。此外，vCenter也可能使用DCERPC协议与Windows系统进行通信，例如收集系统信息、执行命令等。
+
+    在vCenter中，DCERPC协议的使用通常是透明的，它是在底层网络协议栈中处理的，对于上层的管理界面和应用程序来说，通常不需要关心这些细节。然而，了解这些协议的工作原理，可以帮助你更好地理解vCenter的网络通信，以及可能遇到的网络问题。
+
+
