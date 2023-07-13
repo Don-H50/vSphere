@@ -96,3 +96,20 @@ bilibili：
     gRPC提供了一种高效，高性能的通信方式，支持多种编程语言，适用于在各种不同的系统和平台上使用。
 
 可以将RPC视为一个更高级别的抽象，而gRPC和DCERPC则是这个抽象的具体实现。
+
+## 一个猜想
+
+**如果vcenter server和esxi之间进行了通信并使用了dcerpc协议，那么这个dcerpc数据包可能还会被https协议封装吗，导致我抓包看到的是ssl/tls协议的数据包？**
+
+在理论上，确实有可能在HTTPS（HTTP over SSL/TLS）数据流中嵌入DCERPC流量，但在实践中，这种情况非常罕见，并且在vCenter Server和ESXi之间的通信中基本上不会出现。
+
+在大多数情况下，DCERPC协议通常使用在SMB（Server Message Block）协议上，这是Windows系统中文件和打印服务共享的标准协议。DCERPC允许在不同的计算机之间执行远程过程调用（RPC），通常用于Windows环境中。
+
+在VMware的环境中，vCenter Server与ESXi主机之间的通信主要基于HTTP/HTTPS，这是一种基于文本的协议，用于发送和接收由XML编码的SOAP消息。这些消息用于执行各种操作，如创建虚拟机、迁移虚拟机等。
+
+SSL/TLS是一种加密协议，用于保护HTTP数据流的安全。在你的Wireshark抓包结果中，如果你看到了大量的SSL/TLS数据包，那么这很可能是vCenter Server和ESXi主机之间的HTTPS通信。
+
+在你的场景中，如果你无法看到明确的DCERPC数据包，那可能是因为这些数据包被SSL/TLS加密了。你可以尝试使用SSLKEYLOGFILE环境变量或通过提供服务器的私钥来解密SSL/TLS流量，这样你可能就能看到隐藏在加密流量中的DCERPC数据包。但是，请注意，这需要适当的权限和技能，而且可能对隐私和安全性有影响。
+
+总的来说，虽然理论上可以在HTTPS流量中嵌入DCERPC流量，但在实践中，这在vCenter Server和ESXi主机之间的通信中几乎不可能出现。如果你在SSL/TLS数据流中看不到DCERPC数据包，那很可能是因为它们就不在那里。
+
