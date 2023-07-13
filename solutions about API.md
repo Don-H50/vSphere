@@ -158,5 +158,59 @@ vCenter提供了哪些应用接口？对其API可以怎么进行分类？
       请注意，虽然REST API在许多情况下有上述优点，但是你选择使用和测试哪种API类型，应根据你的具体需求和应用场景来决定。
 
 
+## vcenter API 带参数{}连接测试方法：
 
+我访问vcenter的rest api：https://{api_host}/api/cis/tagging/category，访问网页返回200，但内容只有[]，没有category的具体信息，然后我通过创建category的api：https://{api_host}/api/cis/tagging/category，通过post请求访问发现无法创建，http返回400，我的post body消息体如下：{
+	"associable_types": [
+		"string"
+	],
+	"cardinality": "SINGLE",
+	"description": "nothong happend",
+	"name": "com.vm.category.first"
+}，请问我提交的参数有什么问题吗？我该如何使用这个创建category的api呢？
 
+POST请求的消息体中，"associable_types"字段的值应该是一个具体的资源类型的列表，例如"VirtualMachine"，而不应该是"string"。这是因为"associable_types"字段定义了这个类别可以应用的对象类型。
+
+下面是一个正确的请求体的示例：
+
+      {
+          "create_spec": {
+              "name": "com.vm.category.first",
+              "description": "Category Description",
+              "cardinality": "SINGLE",
+              "associable_types": ["VirtualMachine"]
+          }
+      }
+
+**注意：** "associable_types"字段的值是一个资源类型的列表，表示这个类别可以应用的对象类型。你可以查看VMware的文档，获取可以使用的资源类型的完整列表。
+
+----------------------------
+
+创建tag的api为：https://{api_host}/api/cis/tagging/tag，它是post请求方式，body 消息体为：{
+	"category_id": "string",
+	"description": "string",
+	"name": "string"
+}，在调用这个api进行创建时，category_id是要求提供已经创建好的category的id。
+
+      {
+          "category_id": "id-of-com.vm.category.first",
+          "description": "This is my tag",
+          "name": "myTag"
+      }
+
+## vcenter 用户创建方式
+
+VMware vCenter Server 支持创建和管理多个用户账户。用户管理并不在 vCenter Server 自己的界面上完成，而是通过与 vCenter Server 集成的 VMware vSphere 或者 VMware vCenter Single Sign-On (SSO) 来进行。
+
+在 vSphere Web Client 里，你可以创建、编辑和删除用户和组，并为他们赋予在 vCenter Server 中执行任务的权限。以下是通过 vSphere Web Client 创建用户的基本步骤：
+
+      登录到 vSphere Web Client。
+      在 vSphere Web Client 主页上，点击 "Administration"。
+      在导航栏左侧，展开 "Single Sign-On" 并点击 "Users and Groups"。
+      在 "Users" 标签页下，点击图标 "Add User" 来添加新用户。
+      你需要提供新用户的用户名、密码、确认密码、姓和名。你也可以提供邮箱地址和描述，但这不是必须的。
+      点击 "OK"。
+
+通过这种方式创建的用户会在默认的 SSO 域（通常是 vsphere.local）下。这些用户可以用于登录 vSphere Web Client，但他们最初没有任何权限。你需要为这些用户分配权限才能让他们在 vCenter Server 中执行任务。
+
+ vCenter Server 的管理员，有这些权限。      
