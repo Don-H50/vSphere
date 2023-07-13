@@ -1,0 +1,14 @@
+1、dcerpc的后续问题
+	vcenter server和esxi之间的dcerpc协议数据包，没有捕捉到，可能会被https封装么？
+
+	对比不同补丁版本，过滤关键字rpc、dcerpc没有发现；还剩不同数据包没有比较
+
+	引出：1、直接对比不同版本软件。 2、进入vcenter底层操作系统寻找dcerpc相关函数库。
+
+	# 针对引出2、找到一篇cve漏洞分析文章，用到了该方法。（选讲）
+
+2、插件问题
+	找到了dell插件
+	尝试自己注册一个：https://blog.51cto.com/csynine/512727
+
+3、rest api相关问题
