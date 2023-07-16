@@ -83,3 +83,63 @@ DCERPC (Distributed Computing Environment / Remote Procedure Calls) 是在网络
   记住，虽然DCERPC协议的理论知识很重要，但真正理解和应用这些知识，最好的办法是通过实践，例如编写代码，或者分析实际的网络通信。
 
 
+
+## 插件开发
+
+    我在网络上看到一篇vcenter client插件开发的方法，编写一个XML的配置文件内容如下：<scriptConfiguration version="1.0">
+        <key>com.google.search</key>
+        <description>Google Search Web Page</description>
+        <name>googlesearch</name>
+        <vendor>Google</vendor>
+        <extension parent="HomeView.Applications">
+            <title locale="en">Google Search</title>
+            <url display="window"> http://www.google.com</url>
+            <icon> http://www.google.com/p_w_picpaths/icons/product/search-32.gif</icon>
+        </extension>
+    </scriptConfiguration>
+    他要求我在VMware vCenter安装目录的子目录..\VMware\Infrastructure\tomcat\webapps下再创建一个目录，命名为google-ui，然后把scriptConfig.xml放到这个目录下。问题就是，这个目录\VMware\Infrastructure\tomcat\webapps是安装在windows server下才有的，而我现在使用的版本不支持在windows server安装，请问在photon linux上这个对应的目录会在哪里？
+
+--------------------
+
+    在Photon OS（VMware自家的轻量级Linux发行版）上，vCenter Server的默认安装路径可能与Windows Server的路径有所不同。
+
+    在VMware vCenter Server Appliance（VCSA，基于Photon OS的vCenter服务器）中，应用程序的webapps目录通常位于以下位置：
+    
+    /etc/vmware/vsphere-ui/webapps/
+    
+    因此，你应该在此位置下创建google-ui目录，并将scriptConfig.xml文件放置于其中。
+    
+    然而，由于每个环境的配置可能会有所不同，我建议你使用Linux的find命令来定位webapps目录，以确保你找到了正确的位置。例如：
+    
+    bash
+    Copy code
+    find / -name webapps 2>/dev/null
+    这条命令会在整个系统中搜索名为“webapps”的目录，并忽略错误消息。你可以根据这条命令的输出来找到webapps目录的精确位置。
+    
+    再次提醒，因为我是一个AI模型，最后更新日期为2021年9月，因此提供的信息可能不准确或已经过时。在进行任何操作之前，我强烈建议你查看VMware的官方文档或联系VMware的支持服务以获取最新和最准确的信息。
+
+  -----------------------
+
+      VMware插件开发是一项相对复杂的任务，需要对VMware平台、编程语言和软件开发有深入的理解。为了简化这个过程，VMware提供了一个开发人员指南和一套SDK（软件开发工具包）。这些资源可以帮助你理解如何创建和管理VMware插件。
+      
+      以下是开发VMware插件的基本步骤：
+      
+      确定需求：确定你的插件需要做什么，它将如何帮助用户。你需要在此阶段明确你的目标，确定插件的功能和需求。
+      
+      阅读文档：VMware提供了一套广泛的开发人员文档，包括API参考、开发人员指南和SDK。这些资源可以帮助你理解如何使用VMware的API来开发你的插件。
+      
+      设置开发环境：你需要设置一个适合开发的环境，包括安装必要的软件和工具。这可能包括IDE（如Eclipse或Visual Studio），SDK，和你选择的编程语言的开发环境。
+      
+      编写代码：基于你的需求，开始编写插件的代码。你应该使用VMware的API来完成大部分工作。
+      
+      测试你的插件：在你的vCenter Server环境中安装和测试插件。确保它按照预期工作，并没有引入任何新的问题。
+      
+      打包和发布：当你的插件测试完成后，你可以将它打包为一个可安装的文件（如.vib或.zip文件），然后将它发布给你的用户。
+      
+      你可以在VMware的开发人员网站上找到相关的参考文件，这些文件包括API参考、开发人员指南和SDK。特别是，你可能会对下面的资源感兴趣：
+      
+      VMware的开发人员指南
+      vSphere Web Client SDK
+      最后，请注意VMware的API和SDK可能会随着新版本的发布而变化，所以在开始开发之前，你应该先检查这些资源是否仍然是最新的。
+
+-------------------------
