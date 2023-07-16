@@ -138,8 +138,8 @@ DCERPC (Distributed Computing Environment / Remote Procedure Calls) 是在网络
       
       你可以在VMware的开发人员网站上找到相关的参考文件，这些文件包括API参考、开发人员指南和SDK。特别是，你可能会对下面的资源感兴趣：
       
-      VMware的开发人员指南
-      vSphere Web Client SDK
+      VMware的开发人员指南  https://developer.vmware.com/web/dp/tool/vsphere-automation-sdk
+      vSphere Web Client SDK  https://developer.vmware.com/web/dp/tool/vsphere-automation-sdk
       最后，请注意VMware的API和SDK可能会随着新版本的发布而变化，所以在开始开发之前，你应该先检查这些资源是否仍然是最新的。
 
 -------------------------
