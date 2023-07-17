@@ -143,3 +143,6 @@ DCERPC (Distributed Computing Environment / Remote Procedure Calls) 是在网络
       最后，请注意VMware的API和SDK可能会随着新版本的发布而变化，所以在开始开发之前，你应该先检查这些资源是否仍然是最新的。
 
 -------------------------
+#### ova文件安装失败原因
+
+  插件版本不兼容、可通过日志文件查看，通常放在/var/log/vmware中
