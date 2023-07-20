@@ -1,0 +1,218 @@
+appliance：
+
+put : 'https://{api_host}/api/appliance/access/consolecli' - 允许对控制台访问进行修改。如果被攻击者控制，可能会被用来更改访问控制，从而导致未经授权的访问。
+
+put : 'https://{api_host}/api/appliance/access/dcui' - 允许对 DCUI（Direct Console User Interface）访问进行修改。与上面的风险类似，如果被攻击者控制，可能被用来更改访问控制。
+
+put : 'https://{api_host}/api/appliance/access/shell' - 允许修改 shell 访问。攻击者可能使用这个接口获取未经授权的 shell 访问权限。
+
+put : 'https://{api_host}/api/appliance/access/ssh' - 允许修改 ssh 访问。这可能被攻击者利用，获取未经授权的 ssh 访问。
+
+patch : 'https://{api_host}/api/appliance/health/settings' - 允许修改设备健康设置。攻击者可能使用此接口修改或禁用健康检查，以隐藏攻击或破坏。
+
+post : 'https://{api_host}/api/appliance/local-accounts' - 允许创建本地帐户。攻击者可能使用此接口创建未经授权的帐户。
+
+put : 'https://{api_host}/api/appliance/local-accounts/{username}' - 允许修改指定的本地帐户。攻击者可能使用此接口修改或获取已有用户的访问权限。
+
+patch : 'https://{api_host}/api/appliance/local-accounts/{username}' - 允许部分修改指定的本地帐户。与上一条相同，可能被用来修改或获取已有用户的访问权限。
+
+delete : 'https://{api_host}/api/appliance/local-accounts/{username}' - 允许删除指定的本地帐户。攻击者可能使用此接口删除重要帐户，导致系统无法正常运行。
+
+patch : 'https://{api_host}/api/appliance/networking' - 此 API 允许修改网络设置。如果攻击者控制此 API，他们可能会更改网络配置，导致网络中断，甚至将流量引向他们控制的服务器。
+
+post : 'https://{api_host}/api/appliance/networking?action=change&vmw-task=true' 和 'https://{api_host}/api/appliance/networking?action=reset' - 这些 API 允许更改或重置网络设置。这可能被攻击者利用来更改网络配置，或者恢复到默认设置，可能导致服务中断。
+
+put : 'https://{api_host}/api/appliance/ntp' 和 'post' : 'https://{api_host}/api/appliance/ntp?action=test' - 这些 API 用于更改或测试 NTP（网络时间协议）服务器。如果被攻击者控制，他们可能会更改时间设置，导致时间同步问题，这可能影响到基于时间的操作和日志记录。
+
+post : 'https://{api_host}/api/appliance/services/{service}?action=restart', 'post' : 'https://{api_host}/api/appliance/services/{service}?action=start' 和 'post' : 'https://{api_host}/api/appliance/services/{service}?action=stop' - 这些 API 允许启动、停止或重启指定的服务。如果被攻击者控制，他们可能会停止关键服务，导致系统中断。
+
+post : 'https://{api_host}/api/appliance/shutdown?action=cancel', 'post' : 'https://{api_host}/api/appliance/shutdown?action=poweroff' 和 'post' : 'https://{api_host}/api/appliance/shutdown?action=reboot' - 这些 API 允许取消、执行或重启系统的关机操作。如果被攻击者控制，他们可能会强制系统关机或重启，导致服务中断。
+
+post : 'https://{api_host}/api/appliance/support-bundle?vmw-task=true' - 此 API 用于生成支持包。如果被攻击者控制，他们可能会获取敏感的系统信息。
+
+put : 'https://{api_host}/api/appliance/timesync' - 此 API 用于更改时间同步设置。与 NTP 设置类似，攻击者可能会更改时间设置，导致时间同步问题。
+
+post : 'https://{api_host}/api/appliance/update?action=cancel' - 此 API 允许取消系统更新。如果被攻击者控制，他们可能会取消关键的安全更新，使系统保持在有已知漏洞的版本上。
+
+put : 'https://{api_host}/api/appliance/local-accounts/global-policy' - 此 API 允许更改全局账户策略。攻击者可能会修改账户策略，以降低账户安全性，例如禁用复杂密码或两步验证等。
+
+put : 'https://{api_host}/api/appliance/logging/forwarding' 和 'post' : 'https://{api_host}/api/appliance/logging/forwarding?action=test' - 这些 API 用于更改或测试日志转发设置。如果被攻击者控制，他们可能会更改日志转发设置，使日志被转发到他们控制的服务器，或者使日志转发功能无效，导致审计和问题诊断困难。
+
+	network
+
+'get', 'put' : 'https://{api_host}/api/appliance/networking/interfaces/{interface_name}/ipv4' 和 'get', 'put' : 'https://{api_host}/api/appliance/networking/interfaces/{interface_name}/ipv6' - 这些 API 允许获取或设置指定接口的 IPv4 或 IPv6 配置。如果攻击者能够更改这些设置，他们可能会导致网络中断或将流量引向他们控制的服务器。
+
+'get', 'put' : 'https://{api_host}/api/appliance/networking/proxy/{protocol}' 和 'delete' : 'https://{api_host}/api/appliance/networking/proxy/{protocol}' - 这些 API 允许获取、设置或删除代理服务器的配置。攻击者可能会更改这些设置，以便截获或重定向网络流量。
+
+'post' : 'https://{api_host}/api/appliance/networking/proxy/{protocol}?action=test' - 此 API 用于测试代理服务器的配置。攻击者可能会利用它来枚举有效的代理服务器。
+
+'get', 'put' : 'https://{api_host}/api/appliance/networking/dns/domains', 'post' : 'https://{api_host}/api/appliance/networking/dns/domains' 和 'get', 'put' : 'https://{api_host}/api/appliance/networking/dns/servers', 'post' : 'https://{api_host}/api/appliance/networking/dns/servers' - 这些 API 用于获取、设置或添加 DNS 服务器和域的配置。攻击者可能会更改这些设置，以便截获或重定向 DNS 请求，从而进行中间人攻击。
+
+'put', 'get' : 'https://{api_host}/api/appliance/networking/firewall/inbound' - 这些 API 用于获取或设置入站防火墙规则。攻击者可能会更改这些规则，以便绕过防火墙，或者阻止合法的网络流量。
+
+'get', 'put' : 'https://{api_host}/api/appliance/networking/noproxy' - 这些 API 用于获取或设置不通过代理服务器的网络地址。攻击者可能会更改这些设置，以便截获或重定向这些地址的网络流量。
+
+
+	recovery
+
+'post' : 'https://{api_host}/api/appliance/recovery/backup?action=validate' 和 'post' : 'https://{api_host}/api/appliance/recovery/restore?action=validate' - 这两个 API 接口都是用来验证备份和恢复操作的。如果攻击者能够利用这些 API 接口，他们可能能够伪造验证请求，从而导致无效或损坏的备份或恢复操作。
+
+'post' : 'https://{api_host}/api/appliance/recovery/backup/job' 和 'post' : 'https://{api_host}/api/appliance/recovery/backup/job/{id}?action=cancel' - 这两个 API 接口都与备份任务有关。攻击者可能会利用这些接口创建无效的备份任务，或者取消正在进行的备份任务。
+
+'post' : 'https://{api_host}/api/appliance/recovery/backup/schedules' 和 'patch' : 'https://{api_host}/api/appliance/recovery/backup/schedules/{schedule}'，'delete' : 'https://{api_host}/api/appliance/recovery/backup/schedules/{schedule}' - 这些 API 接口用于管理备份计划。攻击者可能会创建、修改或删除备份计划，这可能会导致数据丢失或备份计划的中断。
+
+'post' : 'https://{api_host}/api/appliance/recovery/restore/job' 和 'post' : 'https://{api_host}/api/appliance/recovery/restore/job?action=cancel' - 这两个 API 接口都与恢复任务有关。攻击者可能会利用这些接口创建无效的恢复任务，或者取消正在进行的恢复任务。
+
+
+	system
+
+'post' : 'https://{api_host}/api/appliance/system/storage?action=resize' 和 'post' : 'https://{api_host}/api/appliance/system/storage?action=resize-ex' - 这些 API 接口用于调整系统存储大小。未经授权的访问可能导致系统存储空间被恶意扩展或缩小，影响其性能和稳定性。
+
+'get' : 'https://{api_host}/api/appliance/system/global-fips' 和 'put' : 'https://{api_host}/api/appliance/system/global-fips' - 这些 API 接口用于获取和设置全局 FIPS (Federal Information Processing Standards) 模式。如果攻击者能够禁用 FIPS 模式，他们可能会削弱系统的安全性。
+	
+	update
+
+'get'	:'https://{api_host}/api/appliance/update/pending'
+'get'	:'https://{api_host}/api/appliance/update/pending/{version}'
+'post'	:'https://{api_host}/api/appliance/update/pending/{version}?action=install'
+'post'	:'https://{api_host}/api/appliance/update/pending/{version}?action=precheck'
+'post'	:'https://{api_host}/api/appliance/update/pending/{version}?action=stage'
+'post'	:'https://{api_host}/api/appliance/update/pending/{version}?action=stage-and-install'
+'post'	:'https://{api_host}/api/appliance/update/pending/{version}?action=validate'
+'get'	:'https://{api_host}/api/appliance/update/policy'
+'put'	:'https://{api_host}/api/appliance/update/policy'
+'get'	:'https://{api_host}/api/appliance/update/staged'
+'delete'	:'https://{api_host}/api/appliance/update/staged'
+上述接口经未授权访问后可能造成一系列后果，但很难产生具体漏洞。
+
+	settings
+
+'post' : 'https://{api_host}/api/appliance/vcenter/settings/v1/config'：这个 API 用于修改 vCenter Server 的设置。如果攻击者能够对其进行未经授权的访问，他们可能会修改设置，从而影响系统的行为，可能会影响系统的安全性和稳定性。
+
+'delete' : 'https://{api_host}/api/appliance/vcenter/settings/v1/config'：这个 API 用于删除 vCenter Server 的设置。未经授权的访问可能导致重要的设置被删除，影响系统的正常运行。
+
+'post' : 'https://{api_host}/api/appliance/vcenter/settings/v1/config/{version}?action=scan&vmw-task=true'：这个 API 用于扫描特定版本的设置。如果攻击者能够对其进行未经授权的访问，他们可能会得到关于系统设置的敏感信息。
+
+'post' : 'https://{api_host}/api/appliance/vcenter/settings/v1/config?action=apply-desired-state&vmw-task=true'：这个 API 用于应用期望的状态设置。未经授权的访问可能导致系统状态被非法修改。
+
+
+cis
+
+	category
+
+'post' : 'https://{api_host}/api/session'：这个 API 接口用于创建新的会话。如果攻击者能够截获并复用这些会话，他们就可以假冒已经验证过的用户，进行未授权的操作。
+
+'delete' : 'https://{api_host}/api/session'：这个 API 用于删除会话。攻击者可能利用这个接口删除其他用户的会话，导致合法用户被剥夺访问权限。
+
+'post' : 'https://{api_host}/api/cis/tasks/{task}?action=cancel'：这个 API 接口允许取消指定的任务。如果攻击者可以访问此接口，他们可以取消重要的系统任务，对系统的正常运行造成影响。
+
+'patch' : 'https://{api_host}/api/cis/tagging/category/{category_id}'：这个 API 用于修改特定的标签类别。攻击者可能会修改标签类别，影响系统的标签管理和相关的功能。
+
+'delete' : 'https://{api_host}/api/cis/tagging/category/{category_id}'：这个 API 用于删除特定的标签类别。如果攻击者能够访问此接口，他们可能会删除重要的标签类别，对系统的标签管理和相关功能造成影响。
+
+
+	tag
+
+'post' : 'https://{api_host}/api/cis/tagging/tag'：这个 API 接口用于创建新的标签。攻击者可能创建恶意标签，以混淆正常标签，或利用标签功能执行未授权操作。
+
+'patch' : 'https://{api_host}/api/cis/tagging/tag/{tag_id}'：这个 API 用于修改特定的标签。攻击者可能会修改标签，影响系统的标签管理和相关的功能。
+
+'delete' : 'https://{api_host}/api/cis/tagging/tag/{tag_id}'：这个 API 用于删除特定的标签。如果攻击者能够访问此接口，他们可能会删除重要的标签，对系统的标签管理和相关功能造成影响。
+
+'post' : 'https://{api_host}/api/cis/tagging/tag-association/{tag_id}?action=attach'和 'post' : 'https://{api_host}/api/cis/tagging/tag-association/{tag_id}?action=detach'：这些 API 接口用于添加和移除与特定标签关联的对象。如果攻击者能够访问这些接口，他们可能会添加或移除重要对象的标签，从而改变这些对象的属性和行为。
+
+'post' : 'https://{api_host}/api/cis/tagging/tag-association?action=attach-multiple-tags-to-object' 和 'post' : 'https://{api_host}/api/cis/tagging/tag-association?action=detach-multiple-tags-from-object'：这些 API 接口用于给特定对象添加或移除多个标签。如果攻击者能够访问这些接口，他们可能会一次性添加或移除多个标签，对系统造成大量的影响。
+
+
+content
+	
+
+'patch' :'https://{api_host}/api/content/configuration'
+这个API用于对vCenter服务器的配置进行部分更新（Patch操作）。潜在风险可能在于不正确的授权或身份验证机制，可能导致未经授权的访问或配置更改。
+
+	library
+
+'get' :'https://{api_host}/api/content/library/{library_id}'
+这个API用于获取特定ID的库的详细信息。潜在风险可能在于未经授权的访问敏感库，包括访问或泄露库中的机密数据。
+
+'patch' :'https://{api_host}/api/content/library/{library_id}'
+这个API用于对特定ID的库进行部分更新（Patch操作）。潜在风险可能与授权或身份验证机制不正确相关，可能导致未经授权的访问或对库进行未经授权的更改。
+
+'delete' :'https://{api_host}/api/content/local-library/{library_id}'
+这个API用于删除特定ID的本地库。潜在风险可能在于未经授权的删除本地库，导致数据丢失或拒绝服务攻击。
+
+'post' :'https://{api_host}/api/content/local-library/{library_id}?action=publish'
+这个API用于将本地库发布到订阅库。潜在风险可能在于未经授权的发布操作，可能导致未经授权的数据传输或访问。
+
+'post' :'https://{api_host}/api/content/subscribed-library'
+这个API用于订阅库的创建。潜在风险可能在于未经授权的创建订阅库，可能导致未经授权的数据访问或意外的数据传输。
+
+'patch' :'https://{api_host}/api/content/subscribed-library/{library_id}'
+这个API用于对特定ID的订阅库进行部分更新（Patch操作）。潜在风险可能与授权或身份验证机制不正确相关，可能导致未经授权的访问或对订阅库进行未经授权的更改。
+
+'delete' :'https://{api_host}/api/content/subscribed-library/{library_id}'
+这个API用于删除特定ID的订阅库。潜在风险可能在于未经授权的删除订阅库，导致数据丢失或拒绝服务攻击。
+
+'post' :'https://{api_host}/api/content/subscribed-library/{library_id}?action=evict'
+这个API用于从订阅库中驱逐特定ID的库。潜在风险可能在于未经授权的驱逐操作，可能导致数据丢失或拒绝服务攻击。
+
+'post' :'https://{api_host}/api/content/subscribed-library/{library_id}?action=sync'
+这个API用于将特定ID的订阅库与发布的库同步。潜在风险可能在于未经授权的同步操作，可能导致未经授权的数据传输或访问。
+
+'post' :'https://{api_host}/api/content/subscribed-library?action=probe'
+这个API用于探测订阅库的可用性。潜在风险可能在于未经授权的探测操作，可能导致未经授权的数据访问或拒绝服务攻击。
+
+
+
+
+
+vapi 主要包括的是get请求
+
+
+
+hvc rest api 的作用
+
+
+	高可用性虚拟计算（HVC）
+'post' : 'https://{api_host}/api/hvc/links'：此 API 用于创建新的 HVC 链接。HVC 链接是 vCenter Server 实例之间的链接，使它们可以作为一个整体进行管理。
+
+'get' : 'https://{api_host}/api/hvc/links'：此 API 用于获取当前所有的 HVC 链接的列表。
+
+'delete' : 'https://{api_host}/api/hvc/links/{link}'和 'post' : 'https://{api_host}/api/hvc/links/{link}?action=delete'：这两个 API 都用于删除指定的 HVC 链接。
+
+'get' : 'https://{api_host}/api/hvc/links/{link}'：此 API 用于获取指定 HVC 链接的详细信息。
+
+'get' : 'https://{api_host}/api/hvc/management/administrators'：此 API 用于获取当前所有 HVC 管理员的列表。
+
+'put' : 'https://{api_host}/api/hvc/management/administrators'：此 API 用于更新 HVC 管理员的信息。
+
+'post' : 'https://{api_host}/api/hvc/management/administrators?action=add'：此 API 用于添加新的 HVC 管理员。
+
+'post' : 'https://{api_host}/api/hvc/management/administrators?action=remove'：此 API 用于删除指定的 HVC 管理员。
+
+
+'post' : 'https://{api_host}/api/hvc/links'：此 API 用于创建新的高可用性虚拟计算（HVC）链接。如果攻击者能够访问并利用此接口，他们可能会创建恶意的 HVC 链接，从而可能对系统的稳定性或者高可用性造成影响。
+
+'delete' : 'https://{api_host}/api/hvc/links/{link}'和 'post' : 'https://{api_host}/api/hvc/links/{link}?action=delete'：这两个接口都是用于删除特定的 HVC 链接。如果攻击者能够访问并操作这些接口，他们可能会删除重要的 HVC 链接，从而可能对系统的稳定性或者高可用性造成影响。
+
+'put' : 'https://{api_host}/api/hvc/management/administrators'、'post' : 'https://{api_host}/api/hvc/management/administrators?action=add' 和 'post' : 'https://{api_host}/api/hvc/management/administrators?action=remove'：这些接口用于管理 HVC 的管理员。攻击者如果可以访问这些接口，可能会添加恶意管理员，删除有效的管理员，或者更改管理员信息，从而对系统安全造成重大影响。
+
+stats
+
+'post' : 'https://{api_host}/api/stats/acq-specs'：这个 API 用于创建新的采集规格。如果未经适当的权限验证，攻击者可能会创建不适当的采集规格，影响系统的性能。
+
+'delete' : 'https://{api_host}/api/stats/acq-specs/{id}' 和 'patch' : 'https://{api_host}/api/stats/acq-specs/{id}'：这些 API 用于删除和更新采集规格。在没有适当的权限验证下，攻击者可能会修改或删除重要的采集规格，影响数据采集和分析。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
