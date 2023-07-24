@@ -24,3 +24,11 @@ https://hosch3n.github.io/2021/10/08/VMware-vCenter%E6%BC%8F%E6%B4%9E%E5%88%86%E
 https://xz.aliyun.com/t/9698
 
 fiddler----https://www.telerik.com/download/fiddler/fiddler4
+
+
+
+vsphere-client-serenity.jar 和 vsphere-client-virgo.jar：这些 jar 包通常包含 vCenter Server 的 Web 客户端和 API 相关的代码。你可以在这些包中找到 REST API 的相关实现和用户权限的处理逻辑。
+
+vsphere-sdk.jar：这个 jar 包包含 vSphere SDK，这是一个用于与 vCenter Server 进行通信的库。如果你的应用使用了这个 SDK 来与 vCenter Server 进行通信，你可能会在这个 jar 包中找到 REST API 调用的相关代码。
+
+vSphere-client-lib.jar 和 vmware-base.jar：这些 jar 包包含了 vCenter Server 的一些基础类和函数，可能包含处理用户权限的逻辑。
